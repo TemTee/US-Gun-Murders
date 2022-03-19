@@ -8,9 +8,14 @@ data("murders")
 
 
 # Exploring the data  ----------------------------------------------
+
 str(murders)
 head(murders)
 table(is.na(murders))
+
+
+#  Analysing the data ----------------------------------------------
+
 murders <- murders %>% mutate(rate = total/population *10^5)
 head(murders)
 hist(murders$total, col = "cyan 3")
