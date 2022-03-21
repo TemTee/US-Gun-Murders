@@ -50,3 +50,6 @@ murders %>%
   xlab("Murders/100,000 Citizens")+
   ylab("States")+
   theme(legend.position = "none")
+
+murders %>%  select(state, region, rate) %>%          # states with murder rate less than or equals 70%
+  filter(rate <= 0.71)
