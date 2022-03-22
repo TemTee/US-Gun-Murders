@@ -53,3 +53,6 @@ murders %>%
 
 murders %>%  select(state, region, rate) %>%          # states with murder rate less than or equals 70%
   filter(rate <= 0.71)
+
+murders %>% group_by(region) %>%          # murder rate by region
+  summarize(median_rate = median(rate)) 
