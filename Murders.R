@@ -56,3 +56,13 @@ murders %>%  select(state, region, rate) %>%          # states with murder rate 
 
 murders %>% group_by(region) %>%          # murder rate by region
   summarize(median_rate = median(rate)) 
+
+murders %>% mutate(group = case_when
+                   (abb %in% c("ME", "NH", "VT", "MA", "RI", "CT")
+                     ~ "New England", 
+                     abb %in% c("WA", "OR", "CA")
+                     ~ "West Coast",
+                     region == "South" ~ "South", TRUE ~ "other")) %>%
+  group_by(group) %>% 
+  summarize(rate = sum(total) / sum(population) * 10^5) %>%
+  arrange(rate)
