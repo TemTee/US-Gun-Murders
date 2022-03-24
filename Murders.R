@@ -66,3 +66,18 @@ murders %>% mutate(group = case_when
   group_by(group) %>% 
   summarize(rate = sum(total) / sum(population) * 10^5) %>%
   arrange(rate)
+
+p1 <- murders %>%  
+  mutate(rate = total/population*10^5) %>% 
+  filter(population < 2*10^6) %>% 
+  ggplot(aes(population/10^6, rate, label = abb)) +  
+  geom_text() + 
+  ggtitle("Small States")
+
+p2 <- murders %>% 
+  mutate(rate = total/population*10^5) %>%
+  filter(population > 10*10^6) %>%
+  ggplot(aes(population/10^6, rate, label = abb)) +
+  geom_text() +
+  ggtitle("Large States")
+grid.arrange(p1, p2, ncol = 2)
